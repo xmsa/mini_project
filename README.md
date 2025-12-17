@@ -224,3 +224,61 @@ https://example.com/video2.mp4
 * The script requires Python 3.x.
 * Make sure `aria2c` is installed and available in your system's PATH.
 
+
+---
+
+## MOC Player State Manager
+
+This is a Bash script to manage **MOC (Music on Console)** playback, allowing you to save, load, and resume the last played track along with its playback position. It also provides convenient commands to control MOC from the terminal.
+
+### Features
+
+* Save the current track, playback position, and state (play/pause) when stopping MOC.
+* Automatically load and resume the last saved track when starting MOC.
+* Control MOC playback directly via script commands: next, previous, toggle play/pause.
+* Works entirely from the command line.
+
+### Usage
+
+```bash
+./moc_manager.sh {start|stop|next|previous|toggle|save|load}
+```
+
+#### Options
+
+* **start**
+  Starts the MOC server if it’s not running, loads the last saved track and position, and opens the MOC console.
+  If MOC is already running, it just opens the MOC console.
+
+* **stop**
+  Stops the MOC server. If a track is playing or paused, the script saves the current track, playback position, and state before stopping.
+  If no track is playing, the saved state file is removed.
+
+* **next**
+  Skips to the next track in the playlist.
+
+* **previous**
+  Returns to the previous track in the playlist.
+
+* **toggle**
+  Toggles between play and pause for the current track.
+
+* **save**
+  Manually saves the current track, playback position, and state to a file (`~/.mocp_state`).
+
+* **load**
+  Loads the last saved track and resumes playback from the saved position.
+
+### State File
+
+* The script stores the last track, position, and playback state in:
+
+  ```
+  ~/.mocp_state
+  ```
+* This file is automatically created when saving the state and removed if no valid track is found.
+
+### Requirements
+
+* [MOC (Music on Console)](https://moc.daper.net/)
+* Bash shell
